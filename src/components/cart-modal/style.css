@@ -1,0 +1,12 @@
+.CartModal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    margin-top: 20px;
+    margin-right: 100px;
+}
+
+.CartModal-footer span {
+    font-size: 18px;
+    font-weight: 700;
+}

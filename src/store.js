@@ -1,4 +1,4 @@
-import {generateCode} from "./utils";
+import {formatPrice, generateCode} from "./utils";
 
 /**
  * Хранилище состояния приложения
@@ -82,6 +82,40 @@ class Store {
         return item.selected ? {...item, selected: false} : item;
       })
     })
+  }
+
+  addToCart(item) {
+    const findItemIndex = this.state.cart.findIndex(cartItem => item.code === cartItem.code);
+    if (findItemIndex !== -1) {
+      const updatedCart = [...this.state.cart];
+      const findItem = updatedCart[findItemIndex];
+      updatedCart[findItemIndex] = {...findItem, quantity: findItem.quantity + 1};
+
+      this.setState({
+        ...this.state,
+        cart: updatedCart
+      })
+
+    } else {
+      this.setState({
+        ...this.state,
+        cart: [...this.state.cart, { ...item, quantity: 1 }]
+      })
+    }
+  }
+
+  removeFromCart(code) {
+    this.setState({
+      ...this.state,
+      cart: this.state.cart.filter(item => item.code !== code)
+    })
+  }
+
+  calculateTotalPrice() {
+    const price = this.state.cart.length ?
+        this.state.cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+      : 0;
+    return formatPrice(price);
   }
 }
 
