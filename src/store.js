@@ -1,4 +1,4 @@
-import {formatPrice, generateCode} from "./utils";
+import { generateCode} from "./utils";
 
 /**
  * Хранилище состояния приложения
@@ -93,29 +93,27 @@ class Store {
 
       this.setState({
         ...this.state,
-        cart: updatedCart
+        cart: updatedCart,
+        totalPrice: updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
       })
 
     } else {
+      const updatedCart = [...this.state.cart, { ...item, quantity: 1 }]
       this.setState({
         ...this.state,
-        cart: [...this.state.cart, { ...item, quantity: 1 }]
+        cart: updatedCart,
+        totalPrice: updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
       })
     }
   }
 
   removeFromCart(code) {
+    const updatedCart = this.state.cart.filter(item => item.code !== code);
     this.setState({
       ...this.state,
-      cart: this.state.cart.filter(item => item.code !== code)
+      cart: updatedCart,
+      totalPrice: updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
     })
-  }
-
-  calculateTotalPrice() {
-    const price = this.state.cart.length ?
-        this.state.cart.reduce((acc, item) => acc + item.price * item.quantity, 0)
-      : 0;
-    return formatPrice(price);
   }
 }
 

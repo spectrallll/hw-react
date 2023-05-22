@@ -17,7 +17,7 @@ function App({store}) {
 
   const list = store.getState().list;
   const cart = store.getState().cart;
-  const totalPrice = store.calculateTotalPrice();
+  const totalPrice = store.getState().totalPrice;
 
   const callbacks = {
     onAddItem: useCallback((item) => {

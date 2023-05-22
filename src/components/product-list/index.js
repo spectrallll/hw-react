@@ -12,7 +12,7 @@ function ProductList({items, onAddItem}) {
   return <div className={cn()}>
     {items.map(item => {
       return <div key={item.code} className={cn("item")}>
-        <Item item={item} actions={<button onClick={() => onAddItem(item)}>Добавить</button>} />
+        <Item item={item} onAdd={onAddItem} />
       </div>
     })}
   </div>

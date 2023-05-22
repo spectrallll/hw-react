@@ -40,7 +40,11 @@
   padding: 15px;
 }
 
-@media(min-width: 1040px) {
+.Modal-close-btn {
+    margin-right: 15px;
+}
+
+@media(min-width: 967px) {
   .Modal-content {
       min-width: 960px;
       min-height: 150px;

@@ -6,6 +6,11 @@ import {formatPrice} from "../../utils";
 
 function Item(props){
   const cn = bem("Item")
+
+  const callbacks = {
+    onAdd: () => props.onAdd(props.item)
+  }
+
   return (
     <div className={cn()}>
       <div className={cn('code')}>{props.item.code}</div>
@@ -14,7 +19,7 @@ function Item(props){
       </div>
       <div className={cn('actions')}>
         <span className={cn('price')}>{formatPrice(props.item.price)}</span>
-        {props.actions}
+        <button onClick={callbacks.onAdd}>Добавить</button>
       </div>
     </div>
   );

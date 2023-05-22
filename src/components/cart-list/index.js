@@ -1,8 +1,8 @@
 import { cn as bem } from "@bem-react/classname";
 import PropTypes from "prop-types";
-import Item from "../item";
 import {memo} from "react";
 import "./styles.css";
+import CartItem from "../cart-item";
 
 
 function CartList({items, onDeleteItem}) {
@@ -12,10 +12,7 @@ function CartList({items, onDeleteItem}) {
   return <div className={cn()}>
     {items.map(item => {
       return <div key={item.code} className={cn("item")}>
-        <Item item={item} actions={<div className={cn("item-actions")}>
-          {item.quantity}
-          <button onClick={() => onDeleteItem(item.code)}>Удалить</button>
-        </div>} />
+        <CartItem item={item} onDelete={onDeleteItem} />
       </div>
     })}
   </div>

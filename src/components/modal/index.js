@@ -22,7 +22,7 @@ function Modal({ children, isOpen, onClose, title }) {
         <div className={cn("content")}>
           {title && <div className={cn("header")}>
             {title}
-            <button onClick={closeHandler}>Закрыть</button>
+            <button className={cn("close-btn")} onClick={closeHandler}>Закрыть</button>
           </div>}
           <div className={cn("body")}>
             {children}
