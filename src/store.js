@@ -94,7 +94,7 @@ class Store {
       this.setState({
         ...this.state,
         cart: updatedCart,
-        totalPrice: updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+        totalPrice: updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0),
       })
 
     } else {
@@ -102,7 +102,8 @@ class Store {
       this.setState({
         ...this.state,
         cart: updatedCart,
-        totalPrice: updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+        totalPrice: updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0),
+        cartCount: this.state.cartCount + 1
       })
     }
   }
@@ -112,7 +113,8 @@ class Store {
     this.setState({
       ...this.state,
       cart: updatedCart,
-      totalPrice: updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0)
+      totalPrice: updatedCart.reduce((acc, item) => acc + item.price * item.quantity, 0),
+      cartCount: this.state.cartCount - 1
     })
   }
 }
