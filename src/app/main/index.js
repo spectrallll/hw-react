@@ -12,7 +12,6 @@ import {useTranslation} from "../../locales";
 function Main() {
 
   const store = useStore();
-  const [currentPage, setCurrentPage] = useState(1);
 
   const select = useSelector(state => ({
     list: state.catalog.list,
@@ -48,7 +47,7 @@ function Main() {
       <PageTool onOpen={callbacks.openModalBasket} amount={select.amount}
                   sum={select.sum}/>
       <List list={select.list} renderItem={renders.item}/>
-      <Pagination currentPage={select.currentPage} pages={select.totalPages} onPageClick={callbacks.changeCurrentPage} />
+      <Pagination currentPage={select.currentPage} totalPages={select.totalPages} onPageClick={callbacks.changeCurrentPage} />
     </PageLayout>
 
   );
