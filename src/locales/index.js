@@ -4,45 +4,43 @@ import PropTypes from "prop-types";
 const TranslationContext = createContext();
 
 export const TranslationProvider = ({ children }) => {
-    const [translations, setTranslations] = useState(null);
-    const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('locale') || 'ru');
+  const [translations, setTranslations] = useState(null);
+  const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('locale') || 'ru');
 
-    useEffect(() => {
-      const loadTranslations = async () => {
-        const locale = currentLanguage;
+  useEffect(() => {
+    const loadTranslations = async () => {
+      const translationsJson = await import(`./${currentLanguage}.json`);
+      setTranslations(translationsJson.default);
+    };
 
-        const translationsJson = await import(`./${locale}.json`);
-        setTranslations(translationsJson.default);
-      };
+    loadTranslations();
+  }, [currentLanguage]);
 
-      loadTranslations();
-    }, [currentLanguage]);
+  const t = useCallback((key) => {
+    if (!translations) {
+      return key;
+    }
 
-    const t = useCallback((key) => {
-        if (!translations) {
-            return key;
-        }
+    return translations[key] || key;
+  }, [translations]);
 
-        return translations[key] || key;
-    }, [translations]);
+  const changeLanguage = useCallback((language) => {
+    setCurrentLanguage(language);
+    localStorage.setItem('locale', language);
+  }, [])
 
-    const changeLanguage = useCallback((language) => {
-      setCurrentLanguage(language);
-      localStorage.setItem('locale', language);
-    }, [])
+  const i18n = useMemo(() => {
+    return {
+      currentLanguage,
+      changeLanguage
+    }
+  }, [currentLanguage])
 
-    const i18n = useMemo(() => {
-        return {
-          currentLanguage,
-          changeLanguage
-        }
-    }, [currentLanguage])
-
-    return (
-      <TranslationContext.Provider value={{ t, i18n }}>
-        {children}
-      </TranslationContext.Provider>
-    );
+  return (
+    <TranslationContext.Provider value={{ t, i18n }}>
+      {children}
+    </TranslationContext.Provider>
+  );
 };
 
 export const useTranslation = () => useContext(TranslationContext);
