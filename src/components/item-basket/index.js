@@ -12,14 +12,15 @@ function ItemBasket(props) {
   const cn = bem('ItemBasket');
 
   const callbacks = {
-    onRemove: (e) => props.onRemove(props.item._id)
+    onRemove: (e) => props.onRemove(props.item._id),
+    onTitleClick: () => props.onTitleClick()
   };
 
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <div className={cn('title')}>
-        <Link onClick={() => console.log(props.item._id)} className={cn('link')} to={getRouteProductDetails(props.item._id)}>{props.item.title}</Link>
+      <div className={cn('title')} onClick={callbacks.onTitleClick}>
+        <Link className={cn('link')} to={getRouteProductDetails(props.item._id)}>{props.item.title}</Link>
       </div>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
@@ -38,6 +39,7 @@ ItemBasket.propTypes = {
     amount: PropTypes.number
   }).isRequired,
   onRemove: propTypes.func,
+  onTitleClick: propTypes.func
 }
 
 ItemBasket.defaultProps = {

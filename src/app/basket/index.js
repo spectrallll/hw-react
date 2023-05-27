@@ -28,9 +28,9 @@ function Basket() {
 
   const renders = {
     itemBasket: useCallback((item) => {
-      return <ItemBasket item={item} onRemove={callbacks.removeFromBasket}/>
-    }, [callbacks.removeFromBasket]),
-  };
+      return <ItemBasket onTitleClick={callbacks.closeModal} item={item} onRemove={callbacks.removeFromBasket}/>
+      }, [callbacks.removeFromBasket]),
+    };
 
   return (
     <ModalLayout title={t('cart')} onClose={callbacks.closeModal}>
