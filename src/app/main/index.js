@@ -8,6 +8,7 @@ import useSelector from "../../store/use-selector";
 import PageTool from "../../components/page-tool";
 import Pagination from "../../components/pagination";
 import {useTranslation} from "../../locales";
+import Spinner from "../../components/spinner";
 
 function Main() {
 
@@ -18,7 +19,8 @@ function Main() {
     amount: state.basket.amount,
     sum: state.basket.sum,
     currentPage: state.catalog.currentPage,
-    totalPages: state.catalog.totalPages
+    totalPages: state.catalog.totalPages,
+    loading: state.catalog.loading
   }));
 
   useEffect(() => {
@@ -27,7 +29,7 @@ function Main() {
 
   const callbacks = {
     // Добавление в корзину
-    addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
+    addToBasket: useCallback(item => store.actions.basket.addToBasket(item), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
     changeCurrentPage: useCallback((page) => store.actions.catalog.changePage(page), [store])
@@ -35,7 +37,7 @@ function Main() {
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
+      return <Item item={item} onAdd={callbacks.addToBasket} href={`articles/${item._id}`}/>
     }, [callbacks.addToBasket]),
   };
 
@@ -46,7 +48,7 @@ function Main() {
       <Head title={t('title')}/>
       <PageTool onOpen={callbacks.openModalBasket} amount={select.amount}
                   sum={select.sum}/>
-      <List list={select.list} renderItem={renders.item}/>
+      {select.loading ? <Spinner /> : <List list={select.list} renderItem={renders.item}/>}
       <Pagination currentPage={select.currentPage} totalPages={select.totalPages} onPageClick={callbacks.changeCurrentPage} />
     </PageLayout>
 

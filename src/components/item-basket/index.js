@@ -5,7 +5,6 @@ import {cn as bem} from "@bem-react/classname";
 import PropTypes from "prop-types";
 import './style.css';
 import {Link} from "react-router-dom";
-import {getRouteProductDetails} from "../../routes";
 
 function ItemBasket(props) {
 
@@ -20,7 +19,7 @@ function ItemBasket(props) {
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
       <div className={cn('title')} onClick={callbacks.onTitleClick}>
-        <Link className={cn('link')} to={getRouteProductDetails(props.item._id)}>{props.item.title}</Link>
+        <Link className={cn('link')} to={props.href}>{props.item.title}</Link>
       </div>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>

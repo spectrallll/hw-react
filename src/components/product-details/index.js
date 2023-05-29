@@ -9,7 +9,11 @@ function ProductDetails({item, onAdd}) {
   const cn = bem('ProductDetails');
 
   const callbacks = {
-    onAdd: () => onAdd(item._id)
+    onAdd: () => onAdd({
+      _id: item._id,
+      title: item.title,
+      price: item.price
+    })
   }
 
   return (

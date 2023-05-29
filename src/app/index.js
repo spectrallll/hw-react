@@ -2,7 +2,6 @@ import Main from "./main";
 import Basket from "./basket";
 import useSelector from "../store/use-selector";
 import {Route, Routes} from "react-router-dom";
-import {getRouteProductDetails, getRouteMain} from "../routes";
 import Product from "./product";
 
 /**
@@ -16,8 +15,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path={getRouteMain()} element={<Main />} />
-        <Route path={getRouteProductDetails(':id')} element={<Product />} />
+        <Route path='/' element={<Main />} />
+        <Route path='/articles/:id' element={<Product />} />
       </Routes>
       {activeModal === 'basket' && <Basket/>}
     </>
