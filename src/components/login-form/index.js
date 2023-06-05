@@ -30,7 +30,7 @@ function LoginForm(props) {
       <span className={cn('title')}>Вход</span>
       <FormField renderInput={renders.renderLoginInput} label={'Логин'} />
       <FormField renderInput={renders.renderPasswordInput} label={'Пароль'} />
-      {props.error && <Error message={props.error} />}
+      {props.error && <Error issues={props.error} />}
       <button disabled={props.isLoading} className={cn('submit')} type='submit'>Войти</button>
     </form>
   )
@@ -43,7 +43,9 @@ LoginForm.propTypes = {
     password: PropTypes.string
   }).isRequired,
   isLoading: PropTypes.bool,
-  error: PropTypes.string,
+  error: PropTypes.arrayOf(PropTypes.shape({
+    message: PropTypes.string
+  })),
   onChangeField: PropTypes.func
 }
 

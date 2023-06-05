@@ -44,7 +44,7 @@ function CatalogFilter() {
     <SideLayout padding='medium'>
       <Select value={select.category} onChange={callbacks.onCategory} size='m' disabled={select.waiting}>
         <option value='all'>Все</option>
-        <OptionTree prefix={'-'} array={select.categories} renderItem={item => item.title} />
+        <OptionTree prefix={'- '} array={select.categories} renderItem={item => item.title} />
       </Select>
       <Select options={options.sort} value={select.sort} onChange={callbacks.onSort}/>
       <Input size='large' value={select.query} onChange={callbacks.onSearch} placeholder={'Поиск'}

@@ -8,10 +8,15 @@ import {memo, useCallback} from "react";
 import useStore from "../../hooks/use-store";
 import useSelector from "../../hooks/use-selector";
 import Navigation from "../../containers/navigation";
+import useInit from "../../hooks/use-init";
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 function Login(props) {
   const {t} = useTranslate();
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const store = useStore();
 
@@ -23,12 +28,22 @@ function Login(props) {
 
   const callbacks = {
     onSubmit: useCallback(() => {
-      store.actions.loginForm.submit()
-    }, [store]),
+      store.actions.loginForm.submit().then(status => {
+        if (status === 200) {
+          if (location.state?.from) {
+            navigate(location.state.from.pathname)
+          } else {
+            navigate('/');
+          }
+        }
+      });
+    }, [store, navigate, location]),
     onChangeField: useCallback((key, value) => {
       store.actions.loginForm.changeField(key, value)
     }, [store])
   }
+
+  useInit(() => store.actions.loginForm.init(), []);
 
   return (
     <PageLayout>

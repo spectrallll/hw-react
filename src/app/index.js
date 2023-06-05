@@ -6,6 +6,8 @@ import Article from "./article";
 import Login from "./login";
 import Profile from "./profile";
 import RequireAuth from "../containers/require-auth";
+import useInit from "../hooks/use-init";
+import useStore from "../hooks/use-store";
 
 /**
  * Приложение
@@ -13,7 +15,13 @@ import RequireAuth from "../containers/require-auth";
  */
 function App() {
 
+  const store = useStore();
+
   const activeModal = useSelector(state => state.modals.name);
+
+  useInit(() => {
+    store.actions.session.self();
+  })
 
   return (
     <>

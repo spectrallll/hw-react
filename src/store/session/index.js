@@ -16,6 +16,7 @@ class SessionState extends StoreModule {
   }
 
   async deleteSession() {
+    this.setState({...this.getState(), waiting: true})
     const response = await fetch('/api/v1/users/sign', {
       method: 'DELETE',
       headers: {
@@ -48,6 +49,10 @@ class SessionState extends StoreModule {
     } else {
       this.setState({...this.getState(), waiting: false, isAuth: false}, 'Сброс состояния')
     }
+  }
+
+  clear() {
+    this.setState({...this.getState(), isAuth: false})
   }
 }
 

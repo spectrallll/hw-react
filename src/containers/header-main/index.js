@@ -5,6 +5,7 @@ import useSelector from "../../hooks/use-selector";
 import {useNavigate} from "react-router-dom";
 import UserPanel from "../../components/user-panel";
 import useTranslate from "../../hooks/use-translate";
+import Spinner from "../../components/spinner";
 
 
 function HeaderMain(props) {
@@ -27,9 +28,13 @@ function HeaderMain(props) {
   const renders = {
     right: useCallback(() => {
       if (select.session.isAuth) {
-        return <UserPanel t={t} onLogout={callbacks.onLogout} authData={select.session.authData} />
+        return <Spinner active={select.session.waiting}>
+          <UserPanel t={t} onLogout={callbacks.onLogout} authData={select.session.authData} />
+        </Spinner>
       } else {
-        return <button onClick={callbacks.onClick}>{t('login')}</button>
+        return <Spinner active={select.session.waiting}>
+          <button onClick={callbacks.onClick}>{t('login')}</button>
+        </Spinner>
       }
     }, [select.session, t])
   }
