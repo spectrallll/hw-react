@@ -1,0 +1,29 @@
+.ReplyForm {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.ReplyForm-label {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.ReplyForm-textarea {
+    font-size: 14px;
+    border: 1px solid #666666;
+    max-width: 945px;
+    height: 76px;
+    resize: none;
+}
+
+.ReplyForm-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.ReplyForm-button {
+    max-width: 90px;
+}
