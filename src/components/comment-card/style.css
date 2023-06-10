@@ -1,4 +1,5 @@
 .CommentCard {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -34,7 +35,7 @@
     font-size: 14px;
     padding: 0;
     margin: 0;
-    overflow: hidden;
+    word-break: break-all;
 }
 
 .CommentCard-actions {}
@@ -53,28 +54,28 @@
     padding: 0 0;
 }
 .CommentCard_level_2 {
-    padding: 0 30px;
+   margin-left: 30px;
 }
 .CommentCard_level_3 {
-    padding: 0 60px;
+    margin-left: 60px;
 }
 .CommentCard_level_4 {
-    padding: 0 90px;
+   margin-left: 90px;
 }
 .CommentCard_level_5 {
-    padding: 0 120px;
+    margin-left: 120px;
 }
 .CommentCard_level_6 {
-    padding: 0 150px;
+    margin-left: 150px;
 }
 .CommentCard_level_7 {
-    padding: 0 180px;
+    margin-left: 180px;
 }
 .CommentCard_level_8 {
-    padding: 0 210px;
+    margin-left: 210px;
 }
 .CommentCard_level_9 {
-    padding: 0 240px;
+    margin-left: 240px;
 }
 
 .CommentCard_deleted {

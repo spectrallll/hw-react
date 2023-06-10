@@ -2,10 +2,8 @@ import { cn as bem } from '@bem-react/classname';
 import PropTypes from "prop-types";
 import {memo} from "react";
 import './style.css';
-import AddReplyForm from "../add-reply-form";
-import AuthReplyMessage from "../auth-reply-message";
 
-function CommentCard({ level, data, dateCreate, showForm, onOpen, onClose, isAuth, onReply, my }) {
+function CommentCard({ level, data, dateCreate, onOpen, onReply, my }) {
 
   const callbacks = {
     onOpen: () => onOpen(data._id),
@@ -27,7 +25,6 @@ function CommentCard({ level, data, dateCreate, showForm, onOpen, onClose, isAut
         <div className={cn('actions')}>
           <button onClick={callbacks.onOpen} disabled={data.isDeleted} className={cn('reply')}>Ответить</button>
         </div>
-        {isAuth ? showForm && <AddReplyForm onSubmit={callbacks.onSubmit} onClose={onClose}/> : showForm && <AuthReplyMessage onClose={onClose} />}
       </div>
   );
 }
@@ -47,9 +44,7 @@ CommentCard.propTypes = {
   onOpen: PropTypes.func,
   onClose: PropTypes.func,
   level: PropTypes.number,
-  showForm: PropTypes.bool,
   isAuth: PropTypes.bool,
-  onReply: PropTypes.func
 }
 
 export default memo(CommentCard);

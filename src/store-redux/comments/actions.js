@@ -1,5 +1,3 @@
-import {commentsToTree} from "../../utils/comments-to-tree";
-
 export default {
     /**
      * Загрузка товара
@@ -16,7 +14,7 @@ export default {
             url: `/api/v1/comments?fields=items(_id,text,dateCreate,author(profile(name)),parent(_id,_type),isDeleted),count&limit=*&search[parent]=${id}`
           });
 
-          dispatch({type: 'comments/load-success', payload: {data: commentsToTree(res.data.result.items), count: res.data.result.count}});
+          dispatch({type: 'comments/load-success', payload: res.data.result.items});
 
         } catch (e) {
           dispatch({type: 'comments/load-error'});
@@ -60,8 +58,10 @@ export default {
               }
             })
           });
+          console.log(res);
           dispatch({type: 'comments/reply', payload: res})
         } catch (e) {
+          console.log(e);
           dispatch({type: 'comments/load-error'});
         }
       }

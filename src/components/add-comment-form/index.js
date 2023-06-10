@@ -11,7 +11,9 @@ function AddCommentForm(props) {
     onChange: (e) => setValue(e.target.value),
     onSubmit: (e) => {
       e.preventDefault();
-      props.onSubmit(value)
+      if (value.trim() !== "") {
+        props.onSubmit(value)
+      }
     }
   }
 

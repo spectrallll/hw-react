@@ -1,17 +1,23 @@
 import './style.css';
-import {Link} from "react-router-dom";
 import {cn as bem} from '@bem-react/classname';
 import {memo} from "react";
+import PropTypes from "prop-types";
 
 function AuthMessage(props) {
   const cn = bem('AuthMessage');
   return (
     <div className={cn()}>
-      <span>
-        <Link className={cn('link')} to={'/login'}>Войдите</Link>, чтобы иметь возможность комментировать
-      </span>
+      <span onClick={props.onClick} className={cn('link')}>Войдите</span>, чтобы иметь возможность комментировать
     </div>
   )
+}
+
+AuthMessage.propTypes = {
+  onClick: PropTypes.func
+}
+
+AuthMessage.defaultArgs = {
+  onClick: () => {}
 }
 
 export default memo(AuthMessage);
