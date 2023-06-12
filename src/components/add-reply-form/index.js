@@ -46,7 +46,7 @@ function AddReplyForm({ onSubmit, onClose, level, isAuth, onMessage, focus }) {
 
   if (!isAuth) {
     return (
-      <div className={cn({ level })}>
+      <div ref={areaRef} className={cn({ level })}>
         <AuthReplyMessage onClick={onMessage} onClose={onClose} />
       </div>
     );

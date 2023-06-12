@@ -9,8 +9,8 @@ class I18nService {
   constructor(services, config = {}) {
     this.services = services;
     this.config = config;
-    this._language = this.init();
     this.listeners = [];
+    this.init();
   }
 
   init() {
@@ -21,10 +21,7 @@ class I18nService {
       language = this.config.defaultLanguage;
     }
 
-    const lang = formatLocale(language)
-
-    this.services.api.setHeader('X-Lang', lang);
-    return lang;
+    this.setLanguage(language);
   }
 
   setLanguage(lang) {
@@ -49,6 +46,7 @@ class I18nService {
   }
 
   subscribe(listener) {
+    console.log('subscribe');
     this.listeners.push(listener);
     // Возвращается функция для удаления добавленного слушателя
     return () => {
